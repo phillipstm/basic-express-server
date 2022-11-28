@@ -2,29 +2,34 @@
 
 const { request } = require('express');
 const supertest = require('supertest');
-const { app } = require('../app');
-const client = supertest(myServer.server);
+const { app } = require('./server');
+const client = supertest(app);
 
 
 describe('API server', () => {
-  test('can send data', () => {
-    it('handles invalid requests', async() => {
-      const response = await request.get('/foo');
-      expect(response.staus).toEqual(404);
-    });
-    it('handles errors', async() => {
-      const response = await request.get('bad');
-      expect(response.staus).toEqual(500);
-      expect(response.body.route).toEqual('./bad');
-      expect(response.body.message).toEqual('/');
-    });
-    it ('handles root path', async() => {
-      const response = await request.get('/');
-      expect(response.status).toBe('This is a bad route');
-    });
-    return client.get('/data')
-      .then(response => {
-        expect(response.body).toBeDefined();
-      });
+
+  it('handles invalid requests', async () => {
+    const response = await request.get('/foo');
+    expect(response.status).toEqual(404);
   });
+
+  it('handles errors', async () => {
+    const response = await request.get('/bad');
+    expect(response.status).toEqual(500);
+    expect(response.body.route).toEqual('./bad');
+    expect(response.body.message).toEqual('Sorry this is a bad route');
+  });
+
+  it('handles root path', async () => {
+    const response = await request.get('/');
+
+    expect(response.status).toBe('200');
+    expect(response.text).toBeTruthy();
+    expect(response.text).toEqual('Hello Friend');
+  });
+  return client.get('/data')
+    .then(response => {
+      expect(response.body).toBeDefined();
+    });
 });
+

@@ -11,7 +11,7 @@ describe('test logger middleware', () => {
   let consoleSpy;
   let req = {};
   let res = {};
-  let next = jest.fn();
+  let next = jest.fn();//spies on the next method
 
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, 'log').mockImplementation();
@@ -24,7 +24,7 @@ describe('test logger middleware', () => {
   test('Logs output', () => {
     logger(req, res, next);
     console.log('req', req);
-    expect(consoleSpy).toHaveBeenCalledWith(`REQUEST: ${req.originalURL}`);
+    expect(consoleSpy).toHaveBeenCalledWith(`REQUEST: ${req.method}, ${req.originalURL}`);
   });
   test('Calls next()', () => {
     logger(req, res, next);

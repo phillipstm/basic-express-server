@@ -4,23 +4,25 @@ const express = require('express');
 const notFound = require('./error-handlers/404');
 const errorHandler = require('./error-handlers/500');
 const logger = require('./middleware/logger');
+const validator = require('./middleware/validator');
 const PORT = process.env.PORT || 3002;
 const app = express();
 
 app.use(logger);
+app.use(validator);
 
-app.get('./', (req, res, next) => {
+app.get('./', (req, res) => {
   res.status(200).send('Hello Peeps');
 });
 
 app.get('/bad', (req, res, next) => {
   next('Oops bad route');
 });
-//app.get('/name', (req, res, next) => {
-//     let { name } = req.query;
-//     console.log('name', name);
+app.get('/name', (req, res, next) => {
+  let { name } = req.query;
+  console.log('name', name);
 
-// });
+});
 
 app.use('*', notFound);
 
@@ -30,7 +32,7 @@ function start() {
   app.listen(PORT, () => console.log(`listening on ${PORT}`));
 }
 
-module.exports = {app, start};
+module.exports = { app, start };
 
 
 /**
@@ -39,6 +41,8 @@ module.exports = {app, start};
  * @returns a hello message
  */
 
-function greet(name){
+function greet(name) {
   return `Hello ${name}`;
 }
+
+greet('Jo Blo');

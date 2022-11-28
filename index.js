@@ -10,4 +10,4 @@ app.use('*',(notFound, res, next) => {
   res.send('This Works');
 });
 
-const notFound = require('./')
+const notFound = require('./');

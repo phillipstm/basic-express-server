@@ -1,16 +1,12 @@
 'use strict';
 
-const express = require('express');
-const app = express();
-const errorHandler = require('./src/error-handlers');
-const server = require('./src/server');
-const env = require('dotenv');
+// const express = require('express');
+// const app = express();
+// const errorHandler = require('./src/error-handlers');
+// const server = require('./src/server');
+// const .dotenv = require('./env');
 
 
-app.listen(3001);
+const { start } = require('./src/server');
 
-app.use('*',(notFound, res, next) => {
-  res.send('This Works');
-});
-
-const notFound = require('./');
+start();

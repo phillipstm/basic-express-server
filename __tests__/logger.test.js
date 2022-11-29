@@ -1,8 +1,8 @@
 'use strict';
 
-const supertest = require('supertest');
-const { app } = require('../src/server');
-const request = supertest(app);
+// const supertest = require('supertest');
+// const { app } = require('../src/server');
+// const req = supertest(app);
 
 let logger = require('./middleware/logger');
 

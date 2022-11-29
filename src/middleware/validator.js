@@ -1,9 +1,12 @@
 'use strict';
 
-module.exports = (req, res, next) => {
+
+const validator= (req, res, next) => {
   if (req.query.name) {
     next();
   } else {
     next('Name required');
   }
 };
+
+module.exports = validator;

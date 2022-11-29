@@ -18,6 +18,7 @@ app.get('./', (req, res) => {
 app.get('/bad', (req, res, next) => {
   next('Oops bad route');
 });
+
 app.get('/name', (req, res, next) => {
   let { name } = req.query;
   console.log('name', name);

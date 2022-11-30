@@ -19,10 +19,19 @@ app.get('/bad', (req, res, next) => {
   next('Oops bad route');
 });
 
-app.get('/name', (req, res, next) => {
-  let { name } = req.query;
-  console.log('name', name);
-
+app.get('/person', (req, res, next) => {
+  let { personName } = req.query;
+  console.log('personName', personName);
+  
+  try{
+    if(personName){
+      res.status(200).send(`${personName} hola amigo`);
+    }else{
+      res.status(200).send(`So happy you're here`)
+    }
+  }catch(err){
+    next(err.message);
+  }
 });
 
 app.use('*', notFound);
@@ -42,8 +51,8 @@ module.exports = { app, start };
  * @returns a hello message
  */
 
-function greet(name) {
-  return `Hello ${name}`;
+function greet(personName) {
+  return `Hello ${personName}`;
 }
 
 greet('Jo Blo');

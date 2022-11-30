@@ -15,6 +15,6 @@ When present, output JSON to the client with this shape: { name: "name provided"
 Without a name in the query string, force a “500” error
 
 Link to Pull Request
-[pull-request]()
-
+[pull-request](https://github.com/phillipstm/basic-express-server/pull/1)
+[deployment](https://dashboard.render.com/web/srv-ce35dapgp3jgrcpsmhpg/deploys/dep-ce3u0shgp3jjc8fsvil0)
 Credit: CodeFellows starter code.
